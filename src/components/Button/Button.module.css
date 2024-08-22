@@ -1,7 +1,29 @@
 .button {
-  width: 50%;
+  font-family: inherit;
+  background: var(--primary-color);
+  border: none;
+  color: var(--white-color);
+  border-radius: 28px;
+  text-align: center;
+  cursor: pointer;
+  transition: background 0.25s;
 }
 
-.greenButton {
-  background-color: green;
+.big {
+  box-shadow: 0 10px 40px 0 rgba(122, 129, 190, 0.16);
+  padding: 19px 59px;
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.small {
+  font-weight: 400;
+  font-size: 16px;
+  padding: 10px 25px;
+}
+
+.button:hover {
+  background: var(--primary-hover-color);
 }
