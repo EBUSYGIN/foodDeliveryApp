@@ -6,8 +6,11 @@
   --text-color: #000000;
   --text-secondary-color: #5b5b5e;
   --separator-color: #d4d6e0;
+  --info-color: #9ea1b1;
 }
 
 body {
   font-family: 'Open Sans', sans-serif, Arial, Helvetica;
+  margin: 0;
+  padding: 0;
 }
