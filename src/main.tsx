@@ -4,14 +4,16 @@ import { createRoot } from 'react-dom/client';
 import './index.css';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
-import Layout from './layout/Sidebar/Layout';
+import Sidebar from './layout/Sidebar/Sidebar';
 import { Cart } from './Pages/Cart/Cart';
 import { Menu } from './Pages/Menu/Menu';
+import ErrorPage from './Pages/Error/Error';
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Layout />,
+    element: <Sidebar />,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: '/cart',

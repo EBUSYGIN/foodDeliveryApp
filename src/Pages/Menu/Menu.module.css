@@ -1,0 +1,9 @@
+.content {
+  padding: 40px 60px;
+  width: 100%;
+}
+
+.heading {
+  display: flex;
+  justify-content: space-between;
+}

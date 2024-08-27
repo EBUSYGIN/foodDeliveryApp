@@ -7,6 +7,9 @@
   --text-secondary-color: #5b5b5e;
   --separator-color: #d4d6e0;
   --info-color: #9ea1b1;
+  --search-color: #9aa0b4;
+  --search-background-color: #fcfcfd;
+  --search-border-color: #efefef;
 }
 
 body {
