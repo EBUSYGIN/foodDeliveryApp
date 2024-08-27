@@ -1,0 +1,25 @@
+.search-container {
+  position: relative;
+}
+
+.search {
+  background: var(--search-background-color);
+  border: 1px solid var(--search-border-color);
+  padding: 16px 30px 16px 44px;
+  font-weight: 400;
+  font-size: 14px;
+  font-style: normal;
+  color: var(--color-text);
+  border-radius: 10px;
+  max-width: 200px;
+}
+
+.icon {
+  position: absolute;
+  top: 17px;
+  left: 17px;
+}
+
+.search:focus {
+  outline: none;
+}
