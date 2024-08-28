@@ -6,7 +6,7 @@ import cn from 'classnames';
 function Sidebar() {
   return (
     <div className={styles.layout}>
-      <div className={styles.sidebar}>
+      <nav className={styles.sidebar}>
         <div className={styles.user}>
           <img className={styles.avatar} src='/avatar.png' alt='Аватар' />
           <div className={styles.name}>Имя фамилия</div>
@@ -40,7 +40,7 @@ function Sidebar() {
           <img src='exit-icon.svg' alt='Иконка выхода' />
           Выйти
         </Button>
-      </div>
+      </nav>
       <Outlet />
     </div>
   );

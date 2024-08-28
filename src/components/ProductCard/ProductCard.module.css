@@ -1,0 +1,74 @@
+.head {
+  position: relative;
+  min-height: 165px;
+  border-radius: 19px;
+  margin-bottom: 19px;
+}
+
+.card {
+  background: var(--white-color);
+  border-radius: 19px;
+  box-shadow: 18.21428680419922px 18.21428680419922px 36.42857360839844px 0px
+    rgba(211, 209, 216, 0.25);
+  width: 320px;
+  padding-bottom: 20px;
+}
+
+.price {
+  position: absolute;
+  border-radius: 20px;
+  top: 12px;
+  left: 13px;
+  background: var(--white-color);
+  padding: 3px 10px;
+  color: #111719;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.add {
+  position: absolute;
+  background: var(--primary-color);
+  border: none;
+  border-radius: 50%;
+  width: 34px;
+  height: 34px;
+  top: 12px;
+  right: 13px;
+  cursor: pointer;
+  transition: background 0.25s;
+}
+
+.add:hover {
+  background: var(--primary-hover-color);
+}
+
+.currency {
+  color: var(--primary-color);
+}
+
+.rating {
+  position: absolute;
+  bottom: -12px;
+  left: 13px;
+  padding: 4px 7px;
+  border-radius: 20px;
+  background: var(--white-color);
+  box-shadow: 0 6px 24px 0 rgba(254, 114, 76, 0.2);
+  font-weight: 600;
+  font-size: 12px;
+}
+
+.title {
+  font-weight: 600;
+  font-size: 18px;
+  color: var(--text-color);
+}
+
+.description {
+  font-weight: 400;
+  font-size: 14px;
+  color: var(--text-secondary-color);
+}
