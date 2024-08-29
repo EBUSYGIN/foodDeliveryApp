@@ -1,3 +1,7 @@
+.link {
+  text-decoration: none;
+}
+
 .head {
   position: relative;
   min-height: 165px;
@@ -59,6 +63,7 @@
   box-shadow: 0 6px 24px 0 rgba(254, 114, 76, 0.2);
   font-weight: 600;
   font-size: 12px;
+  color: var(--text-color);
 }
 
 .title {

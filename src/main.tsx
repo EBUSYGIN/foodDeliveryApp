@@ -8,6 +8,8 @@ import Sidebar from './layout/Sidebar/Sidebar';
 import { Cart } from './Pages/Cart/Cart';
 import { Menu } from './Pages/Menu/Menu';
 import ErrorPage from './Pages/Error/Error';
+import ProductPage from './Pages/Product/ProductPage';
+import axios from 'axios';
 
 const router = createBrowserRouter([
   {
@@ -22,6 +24,16 @@ const router = createBrowserRouter([
       {
         path: '/menu',
         element: <Menu />
+      },
+      {
+        path: '/product/:id',
+        element: <ProductPage />,
+        loader: async ({ params }) => {
+          const { data } = await axios.get(
+            `${import.meta.env.VITE_API_URL}/products/${params.id}`
+          );
+          return data;
+        }
       }
     ]
   }
