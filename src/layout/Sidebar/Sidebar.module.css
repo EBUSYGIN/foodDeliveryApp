@@ -3,11 +3,15 @@
   min-height: 100vh;
 }
 
+.sidebarContainer {
+  border-right: 1px solid var(--separator-color);
+}
+
 .sidebar {
   display: flex;
   flex-direction: column;
-  border-right: 1px solid var(--separator-color);
   padding: 30px;
+  height: 95vh;
 }
 
 .user {

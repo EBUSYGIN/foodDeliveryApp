@@ -2,7 +2,7 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 
 import './index.css';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { createBrowserRouter, defer, RouterProvider } from 'react-router-dom';
 
 import Sidebar from './layout/Sidebar/Sidebar';
 import { Cart } from './Pages/Cart/Cart';
@@ -28,11 +28,17 @@ const router = createBrowserRouter([
       {
         path: '/product/:id',
         element: <ProductPage />,
+        errorElement: <>Продукт не найден</>,
         loader: async ({ params }) => {
-          const { data } = await axios.get(
-            `${import.meta.env.VITE_API_URL}/products/${params.id}`
-          );
-          return data;
+          return defer({
+            data: await axios
+              .get(`${import.meta.env.VITE_API_URL}/products/${params.id}`)
+              .then((data) => data)
+          });
+          // const { data } = await axios.get(
+          //   `${import.meta.env.VITE_API_URL}/products/${params.id}`
+          // );
+          // return data;
         }
       }
     ]
