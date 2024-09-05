@@ -53,9 +53,7 @@ const LoginPage = () => {
               validate: validateEmail
             })}
           />
-          <div className={styles.invalid}>
-            {(errors?.email && `${errors?.email?.message}`) || ''}
-          </div>
+          <div>{errors?.email?.message ? `${errors.email.message}` : ' '}</div>
         </label>
         <label className={styles.label}>
           Ваш пароль
@@ -66,8 +64,8 @@ const LoginPage = () => {
               validate: validatePassword
             })}
           />
-          <div className={styles.invalid}>
-            {(errors?.password && `${errors?.password?.message}`) || ''}
+          <div>
+            {errors?.password?.message ? `${errors.password.message}` : ' '}
           </div>
         </label>
         <Button className={styles.button} appereance='big'>
