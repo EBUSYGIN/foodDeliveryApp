@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Button from '../../components/Button/Button';
 import Heading from '../../components/Heading/Heading';
 import Input from '../../components/Input/Input';
@@ -8,8 +8,14 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 
 import { requestAccessToken } from '../../helpers/requestToken';
 import { AxiosError } from 'axios';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '../../Redux/store';
+import { userActions } from '../../Redux/user.slice';
 
 const LoginPage = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch<AppDispatch>();
+
   const {
     register,
     handleSubmit,
@@ -20,8 +26,10 @@ const LoginPage = () => {
     const token = await requestAccessToken(data);
     if (token instanceof AxiosError) {
       console.log(token.response?.data.message);
+      return;
     }
-    console.log(token);
+    dispatch(userActions.addJwt({ jwt: token }));
+    navigate('/');
   };
 
   const validateEmail = (data: string) => {

@@ -8,11 +8,16 @@ import axios from 'axios';
 import AuthLayout from '../layout/AuthLayout/AuthLayout';
 import LoginPage from '../Pages/LoginPage/LoginPage';
 import RegisterPage from '../Pages/RegisterPage/RegisterPage';
+import { RequireAuth } from '../components/RequireAuth/RequireAuth';
 
 export const router = createBrowserRouter([
   {
     path: '/',
-    element: <Sidebar />,
+    element: (
+      <RequireAuth>
+        <Sidebar />
+      </RequireAuth>
+    ),
     errorElement: <ErrorPage />,
     children: [
       {
@@ -20,7 +25,7 @@ export const router = createBrowserRouter([
         element: <Cart />
       },
       {
-        path: '/menu',
+        path: '/',
         element: <Menu />
       },
       {
