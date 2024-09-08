@@ -1,0 +1,38 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 29px;
+  width: 300px;
+}
+
+.label {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-weight: 400;
+  font-size: 17px;
+  color: var(--label-color);
+}
+
+.button {
+  margin: 45px 0 29px 0;
+}
+
+.register {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-weight: 600;
+  font-size: 14px;
+  text-align: center;
+}
+
+.link {
+  text-decoration: none;
+  color: var(--primary-color);
+}
+
+.invalid {
+  color: rgb(255, 96, 96);
+  text-wrap: wrap;
+}

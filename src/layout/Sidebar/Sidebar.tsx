@@ -43,7 +43,9 @@ function Sidebar() {
           </Button>
         </nav>
       </div>
-      <Outlet />
+      <div className={styles.content}>
+        <Outlet />
+      </div>
     </div>
   );
 }
