@@ -5,12 +5,9 @@ import Input from '../../components/Input/Input';
 import styles from './LoginPage.module.css';
 import { LoginForm } from '../../interfaces/LoginForm.interface';
 import { SubmitHandler, useForm } from 'react-hook-form';
-
-import { requestAccessToken } from '../../helpers/requestToken';
-import { AxiosError } from 'axios';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../Redux/store';
-import { userActions } from '../../Redux/user.slice';
+import { getProfile, login } from '../../Redux/user.slice';
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -23,12 +20,8 @@ const LoginPage = () => {
   } = useForm<LoginForm>({ mode: 'onBlur' });
 
   const submit: SubmitHandler<LoginForm> = async (data) => {
-    const token = await requestAccessToken(data);
-    if (token instanceof AxiosError) {
-      console.log(token.response?.data.message);
-      return;
-    }
-    dispatch(userActions.addJwt({ jwt: token }));
+    await dispatch(login(data));
+    await dispatch(getProfile());
     navigate('/');
   };
 
@@ -52,6 +45,7 @@ const LoginPage = () => {
     <div>
       <Heading>Вход</Heading>
       <form className={styles.form} onSubmit={handleSubmit(submit)}>
+        <div></div>
         <label className={styles.label}>
           Ваш email
           <Input
