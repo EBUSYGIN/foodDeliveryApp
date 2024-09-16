@@ -4,12 +4,17 @@ import styles from './Sidebar.module.css';
 import cn from 'classnames';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../../Redux/store';
-import { userActions } from '../../Redux/user.slice';
+import { getProfile, userActions } from '../../Redux/user.slice';
+import { useEffect } from 'react';
 
 function Sidebar() {
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
   const profile = useSelector((s: RootState) => s.user.profile);
+
+  useEffect(() => {
+    dispatch(getProfile());
+  }, []);
 
   const logout = () => {
     dispatch(userActions.removeJwt());

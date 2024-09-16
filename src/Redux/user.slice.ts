@@ -5,10 +5,12 @@ import axios, { AxiosError } from 'axios';
 import { LoginResponse } from '../interfaces/LoginRespose';
 import { RootState } from './store';
 import { Profile } from '../interfaces/Profile.interface';
+import { RegisterForm } from '../interfaces/RegisterForm.interface';
 
 interface userState {
   jwt: string | null;
-  errorState?: string;
+  loginState?: string;
+  registerState?: string;
   profile?: Profile;
 }
 
@@ -50,6 +52,27 @@ export const getProfile = createAsyncThunk<Profile, void, { state: RootState }>(
   }
 );
 
+export const registerUser = createAsyncThunk(
+  'user/registerUser',
+  async (params: RegisterForm) => {
+    try {
+      const { data } = await axios.post<LoginResponse>(
+        `${import.meta.env.VITE_API_URL}/auth/register`,
+        {
+          email: params.email,
+          password: params.password,
+          name: params.name
+        }
+      );
+      return data;
+    } catch (e) {
+      if (e instanceof AxiosError) {
+        throw new Error(e.response?.data.message);
+      }
+    }
+  }
+);
+
 export const userSlice = createSlice({
   name: 'user',
   initialState,
@@ -66,10 +89,19 @@ export const userSlice = createSlice({
       state.jwt = action.payload.access_token;
     });
     builder.addCase(login.rejected, (state, action) => {
-      state.errorState = action.error.message;
+      state.loginState = action.error.message;
     });
     builder.addCase(getProfile.fulfilled, (state, action) => {
       state.profile = action.payload;
+    });
+    builder.addCase(registerUser.fulfilled, (state, action) => {
+      if (!action.payload) {
+        return;
+      }
+      state.jwt = action.payload?.access_token;
+    });
+    builder.addCase(registerUser.rejected, (state, action) => {
+      state.registerState = action.error.message;
     });
   }
 });
