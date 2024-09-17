@@ -11,6 +11,7 @@ function Sidebar() {
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
   const profile = useSelector((s: RootState) => s.user.profile);
+  const products = useSelector((s: RootState) => s.cart.products);
 
   useEffect(() => {
     dispatch(getProfile());
@@ -32,7 +33,7 @@ function Sidebar() {
           </div>
           <div className={styles.menu}>
             <NavLink
-              to={'/menu'}
+              to={'/'}
               className={({ isActive }) =>
                 cn(styles.link, {
                   [styles.active]: isActive
@@ -51,7 +52,7 @@ function Sidebar() {
               }
             >
               <img src='cart-icon.svg' alt='Иконка меню' />
-              Корзина
+              Корзина {products.reduce((acc, item) => (acc += item.count), 0)}
             </NavLink>
           </div>
           <Button appereance='small' className={styles.exit} onClick={logout}>
