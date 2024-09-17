@@ -4,12 +4,18 @@ import styles from './Sidebar.module.css';
 import cn from 'classnames';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../../Redux/store';
-import { userActions } from '../../Redux/user.slice';
+import { getProfile, userActions } from '../../Redux/user.slice';
+import { useEffect } from 'react';
 
 function Sidebar() {
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
   const profile = useSelector((s: RootState) => s.user.profile);
+  const products = useSelector((s: RootState) => s.cart.products);
+
+  useEffect(() => {
+    dispatch(getProfile());
+  }, []);
 
   const logout = () => {
     dispatch(userActions.removeJwt());
@@ -27,7 +33,7 @@ function Sidebar() {
           </div>
           <div className={styles.menu}>
             <NavLink
-              to={'/menu'}
+              to={'/'}
               className={({ isActive }) =>
                 cn(styles.link, {
                   [styles.active]: isActive
@@ -46,7 +52,7 @@ function Sidebar() {
               }
             >
               <img src='cart-icon.svg' alt='Иконка меню' />
-              Корзина
+              Корзина {products.reduce((acc, item) => (acc += item.count), 0)}
             </NavLink>
           </div>
           <Button appereance='small' className={styles.exit} onClick={logout}>

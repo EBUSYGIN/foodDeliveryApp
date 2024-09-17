@@ -5,47 +5,34 @@ import Input from '../../components/Input/Input';
 import styles from './LoginPage.module.css';
 import { LoginForm } from '../../interfaces/LoginForm.interface';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
-import { AppDispatch } from '../../Redux/store';
-import { getProfile, login } from '../../Redux/user.slice';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, RootState } from '../../Redux/store';
+import { login } from '../../Redux/user.slice';
+import { useEffect } from 'react';
+import { validateEmail } from '../../utils/validateEmail';
 
 const LoginPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
-
+  const { loginState, jwt } = useSelector((s: RootState) => s.user);
   const {
     register,
     handleSubmit,
     formState: { errors }
-  } = useForm<LoginForm>({ mode: 'onBlur' });
+  } = useForm<LoginForm>({ reValidateMode: 'onSubmit' });
 
-  const submit: SubmitHandler<LoginForm> = async (data) => {
-    await dispatch(login(data));
-    await dispatch(getProfile());
-    navigate('/');
-  };
+  useEffect(() => {
+    if (jwt) navigate('/');
+  }, [jwt, navigate]);
 
-  const validateEmail = (data: string) => {
-    if (data.includes('@')) {
-      return true;
-    } else {
-      return false;
-    }
-  };
-
-  const validatePassword = (data: string) => {
-    if (data.length > 1) {
-      return true;
-    } else {
-      return 'Пароль должен быть длиннее одного символа';
-    }
+  const submit: SubmitHandler<LoginForm> = (data) => {
+    dispatch(login(data));
   };
 
   return (
     <div>
       <Heading>Вход</Heading>
       <form className={styles.form} onSubmit={handleSubmit(submit)}>
-        <div></div>
         <label className={styles.label}>
           Ваш email
           <Input
@@ -55,21 +42,25 @@ const LoginPage = () => {
               validate: validateEmail
             })}
           />
-          <div>{errors?.email?.message ? `${errors.email.message}` : ' '}</div>
         </label>
         <label className={styles.label}>
           Ваш пароль
           <Input
             placeholder='Пароль'
             {...register('password', {
-              required: true,
-              validate: validatePassword
+              required: 'Поле обязательно к заполнению'
             })}
           />
-          <div>
-            {errors?.password?.message ? `${errors.password.message}` : ' '}
-          </div>
         </label>
+        <div className={styles.errors}>
+          {errors.email
+            ? errors.email.message
+            : errors.password
+            ? errors.password.message
+            : loginState
+            ? loginState
+            : ''}
+        </div>
         <Button className={styles.button} appereance='big'>
           Вход
         </Button>
