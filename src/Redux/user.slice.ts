@@ -31,7 +31,9 @@ export const login = createAsyncThunk(
       );
       return data;
     } catch (e) {
-      if (e instanceof AxiosError) throw new Error(e.response?.data.message);
+      if (e instanceof AxiosError) {
+        throw new Error(e.response?.data.message);
+      }
     }
   }
 );
