@@ -10,16 +10,30 @@ export function Menu() {
   const [products, setProducts] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | undefined>();
+  const [filter, setFilter] = useState<string>();
 
   useEffect(() => {
-    getMenu();
-  }, []);
+    getMenu(filter);
+  }, [filter]);
 
-  const getMenu = async () => {
+  const searchHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      const value = (e.target as HTMLInputElement).value;
+      setFilter(value);
+      console.log(value);
+    }
+  };
+
+  const getMenu = async (name?: string) => {
     try {
       setIsLoading(true);
       const { data } = await axios.get<Product[]>(
-        `${import.meta.env.VITE_API_URL}/products`
+        `${import.meta.env.VITE_API_URL}/products`,
+        {
+          params: {
+            name
+          }
+        }
       );
       setProducts(data);
       setIsLoading(false);
@@ -36,7 +50,10 @@ export function Menu() {
     <div className={styles.content}>
       <div className={styles.heading}>
         <Heading>Меню</Heading>
-        <Search placeholder='Введите блюдо или состав' />
+        <Search
+          placeholder='Введите блюдо или состав'
+          onKeyUp={searchHandler}
+        />
       </div>
       <div className={styles.menu}>
         {isLoading === false ? (
