@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { getItem, JWT_KEY } from '../helpers/localStorage';
+
 import { LoginForm } from '../interfaces/LoginForm.interface';
 import axios, { AxiosError } from 'axios';
 import { LoginResponse } from '../interfaces/LoginRespose';
@@ -15,7 +15,7 @@ interface userState {
 }
 
 const initialState: userState = {
-  jwt: getItem(JWT_KEY) ?? null
+  jwt: null
 };
 
 export const login = createAsyncThunk(
