@@ -5,6 +5,7 @@
 
 .sidebarContainer {
   border-right: 1px solid var(--separator-color);
+  position: static;
 }
 
 .sidebar {
@@ -12,6 +13,7 @@
   flex-direction: column;
   padding: 30px;
   height: 95vh;
+  border-bottom: 1px solid var(--separator-color);
 }
 
 .user {
