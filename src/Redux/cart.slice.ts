@@ -25,17 +25,13 @@ export const cartSlice = createSlice({
       state.products = state.products.filter((i) => i.id !== action.payload);
     },
     decreaseProduct: (state, action: PayloadAction<number>) => {
-      state.products.map((product) => {
-        if (product.id === action.payload) {
-          if (product.count === 1) {
-            state.products = state.products.filter(
-              (i) => i.id !== action.payload
-            );
-          } else {
-            product.count--;
-          }
-        }
-      });
+      const existed = state.products.find((i) => i.id === action.payload);
+      if (!existed) return;
+      if (existed.count === 1) {
+        state.products = state.products.filter((i) => i.id !== action.payload);
+      } else {
+        existed.count--;
+      }
     }
   }
 });

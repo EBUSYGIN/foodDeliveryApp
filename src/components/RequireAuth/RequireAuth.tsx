@@ -5,7 +5,7 @@ import { RootState } from '../../Redux/store';
 
 export const RequireAuth = ({ children }: { children: ReactNode }) => {
   const jwt = useSelector((state: RootState) => state.user.jwt);
-  console.log(jwt);
+
   if (!jwt) return <Navigate to={'/auth/login'} />;
   return children;
 };

@@ -1,0 +1,31 @@
+.checkout {
+  margin-top: 29px;
+  max-width: 512px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.line {
+  margin: 17px 0;
+  border: 1px solid var(--separator-color);
+}
+
+.info {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 400;
+  font-size: 16px;
+}
+
+.price {
+  font-weight: 400;
+  font-size: 19px;
+  text-align: right;
+}
+
+.info span {
+  font-weight: 400;
+  font-size: 14px;
+  color: #9796a1;
+}

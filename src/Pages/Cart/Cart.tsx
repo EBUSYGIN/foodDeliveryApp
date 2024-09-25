@@ -5,9 +5,15 @@ import CartItem from '../../components/CartItem/CartItem';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Product } from '../../interfaces/product.interface';
+import Checkout from '../../components/Checkout/Checkout';
+import Button from '../../components/Button/Button';
+import styles from './Cart.module.css';
+
+const DELIVERY_FEE = 169;
 
 export function Cart() {
   const products = useSelector((s: RootState) => s.cart.products);
+  const jwt = useSelector((s: RootState) => s.user.jwt);
   const [cartItems, setCartItems] = useState<Product[]>();
 
   useEffect(() => {
@@ -26,8 +32,35 @@ export function Cart() {
     setCartItems(info);
   };
 
+  const productPrice = products
+    .map((product) => {
+      const item = cartItems?.find((i) => i.id === product.id);
+      if (!item) return 0;
+      return product.count * item.price;
+    })
+    .reduce((acc, value) => (acc += value), 0);
+
+  const checkout = async () => {
+    try {
+      const data = await axios.post(
+        `${import.meta.env.VITE_API_URL}/order`,
+        {
+          products: products
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${jwt}`
+          }
+        }
+      );
+      console.log(data);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   return (
-    <div>
+    <div className={styles.checkout}>
       <Heading>Корзина</Heading>
       {products.map((product) => {
         const productInfo = cartItems?.find((p) => p.id === product.id);
@@ -36,6 +69,17 @@ export function Cart() {
           <CartItem key={product.id} count={product.count} {...productInfo} />
         );
       })}
+      <Checkout
+        productPrice={productPrice}
+        deliveryFee={DELIVERY_FEE}
+        totalPrice={productPrice + DELIVERY_FEE}
+        count={2}
+      />
+      <div className={styles.button}>
+        <Button appereance='big' onClick={checkout}>
+          оформить
+        </Button>
+      </div>
     </div>
   );
 }

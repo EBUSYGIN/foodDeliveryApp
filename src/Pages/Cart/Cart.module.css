@@ -1,0 +1,13 @@
+.checkout {
+  max-width: 512px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 44px;
+}
