@@ -3,22 +3,42 @@ import Heading from '../../components/Heading/Heading';
 import { RootState } from '../../Redux/store';
 import CartItem from '../../components/CartItem/CartItem';
 import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import { Product } from '../../interfaces/product.interface';
 import Checkout from '../../components/Checkout/Checkout';
 import Button from '../../components/Button/Button';
 import styles from './Cart.module.css';
+import Promo from '../../components/Promo/Promo';
 
 const DELIVERY_FEE = 169;
+
+type PromoForm = {
+  promo: {
+    value: string;
+  };
+};
 
 export function Cart() {
   const products = useSelector((s: RootState) => s.cart.products);
   const jwt = useSelector((s: RootState) => s.user.jwt);
   const [cartItems, setCartItems] = useState<Product[]>();
+  const [invalidPromo, setInvalidPromo] = useState<boolean>(false);
 
   useEffect(() => {
     loadProductInfo();
   }, [products]);
+
+  useEffect(() => {
+    let timeoutId: ReturnType<typeof setTimeout>;
+    if (invalidPromo) {
+      timeoutId = setTimeout(() => {
+        setInvalidPromo(false);
+      }, 2000);
+    }
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, [invalidPromo]);
 
   const loadProduct = async (id: number) => {
     const { data } = await axios.get<Product>(
@@ -53,9 +73,22 @@ export function Cart() {
           }
         }
       );
-      console.log(data);
     } catch (e) {
       console.log(e);
+    }
+  };
+
+  const sendPromo = async (e: FormEvent) => {
+    e.preventDefault();
+    const target = e.target as typeof e.target & PromoForm;
+    const { promo } = target;
+    try {
+      const { data } = await axios.post(
+        `${import.meta.env.VITE_API_URL}/${promo}`
+      );
+      console.log(data);
+    } catch (e) {
+      setInvalidPromo(true);
     }
   };
 
@@ -74,6 +107,12 @@ export function Cart() {
         deliveryFee={DELIVERY_FEE}
         totalPrice={productPrice + DELIVERY_FEE}
         count={2}
+      />
+      <Promo
+        placeholder='Промокод'
+        sendPromo={sendPromo}
+        name='promo'
+        isValid={invalidPromo}
       />
       <div className={styles.button}>
         <Button appereance='big' onClick={checkout}>

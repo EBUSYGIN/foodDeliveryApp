@@ -52,7 +52,10 @@ function Sidebar() {
               }
             >
               <img src='cart-icon.svg' alt='Иконка меню' />
-              Корзина {products.reduce((acc, item) => (acc += item.count), 0)}
+              Корзина{' '}
+              <span className={styles.count}>
+                {products.reduce((acc, item) => (acc += item.count), 0)}
+              </span>
             </NavLink>
           </div>
           <Button appereance='small' className={styles.exit} onClick={logout}>

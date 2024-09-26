@@ -6,6 +6,7 @@ import { LoginResponse } from '../interfaces/LoginRespose';
 import { RootState } from './store';
 import { Profile } from '../interfaces/Profile.interface';
 import { RegisterForm } from '../interfaces/RegisterForm.interface';
+import { getItem, JWT_KEY } from '../helpers/localStorage';
 
 interface userState {
   jwt: string | null;
@@ -15,7 +16,7 @@ interface userState {
 }
 
 const initialState: userState = {
-  jwt: null
+  jwt: getItem(JWT_KEY) || null
 };
 
 export const login = createAsyncThunk(
