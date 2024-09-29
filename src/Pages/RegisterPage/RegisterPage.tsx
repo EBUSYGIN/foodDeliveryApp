@@ -80,7 +80,7 @@ const RegisterPage = () => {
       </form>
       <div className={styles.register}>
         <div>Есть аккаунт?</div>
-        <Link className={styles.link} to={'/auth/register'}>
+        <Link className={styles.link} to={'/auth/login'}>
           Войти
         </Link>
       </div>

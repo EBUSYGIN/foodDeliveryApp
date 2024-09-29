@@ -68,7 +68,7 @@ const LoginPage = () => {
       <div className={styles.register}>
         <div>Нет аккаунта?</div>
         <Link className={styles.link} to={'/auth/register'}>
-          Зарегестрироваться
+          Зарегистрироваться
         </Link>
       </div>
     </div>
