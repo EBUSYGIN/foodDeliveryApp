@@ -9,6 +9,7 @@ import AuthLayout from '../layout/AuthLayout/AuthLayout';
 import LoginPage from '../Pages/LoginPage/LoginPage';
 import RegisterPage from '../Pages/RegisterPage/RegisterPage';
 import { RequireAuth } from '../components/RequireAuth/RequireAuth';
+import SuccessOrder from '../Pages/SuccessOrder/SuccessOrder';
 
 export const router = createBrowserRouter([
   {
@@ -43,6 +44,10 @@ export const router = createBrowserRouter([
           // );
           // return data;
         }
+      },
+      {
+        path: '/success/:id',
+        element: <SuccessOrder />
       }
     ]
   },
