@@ -57,13 +57,6 @@
   position: absolute;
   bottom: -12px;
   left: 13px;
-  padding: 4px 7px;
-  border-radius: 20px;
-  background: var(--white-color);
-  box-shadow: 0 6px 24px 0 rgba(254, 114, 76, 0.2);
-  font-weight: 600;
-  font-size: 12px;
-  color: var(--text-color);
 }
 
 .title {

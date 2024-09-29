@@ -6,4 +6,26 @@
 .heading {
   display: flex;
   justify-content: space-between;
+  margin-bottom: 30px;
+}
+
+.menu {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-auto-flow: row;
+  gap: 45px;
+  place-items: center;
+}
+
+@media (max-width: 1155px) {
+  .menu {
+    grid-template-columns: 1fr;
+  }
+
+  .heading {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  }
 }

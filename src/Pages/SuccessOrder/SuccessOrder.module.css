@@ -1,0 +1,13 @@
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  align-items: center;
+}
+
+.success {
+  font-weight: 300;
+  font-size: 31px;
+  line-height: 120%;
+  text-align: center;
+}

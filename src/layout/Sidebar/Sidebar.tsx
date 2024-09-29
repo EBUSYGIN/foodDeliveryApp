@@ -40,7 +40,7 @@ function Sidebar() {
                 })
               }
             >
-              <img src='menu-icon.svg' alt='Иконка меню' />
+              <img src='/menu-icon.svg' alt='Иконка меню' />
               Меню
             </NavLink>
             <NavLink
@@ -51,7 +51,7 @@ function Sidebar() {
                 })
               }
             >
-              <img src='cart-icon.svg' alt='Иконка меню' />
+              <img src='/cart-icon.svg' alt='Иконка меню' />
               Корзина{' '}
               <span className={styles.count}>
                 {products.reduce((acc, item) => (acc += item.count), 0)}
@@ -59,7 +59,7 @@ function Sidebar() {
             </NavLink>
           </div>
           <Button appereance='small' className={styles.exit} onClick={logout}>
-            <img src='exit-icon.svg' alt='Иконка выхода' />
+            <img src='/exit-icon.svg' alt='Иконка выхода' />
             Выйти
           </Button>
         </nav>

@@ -9,6 +9,7 @@ import Checkout from '../../components/Checkout/Checkout';
 import Button from '../../components/Button/Button';
 import styles from './Cart.module.css';
 import Promo from '../../components/Promo/Promo';
+import { useNavigate } from 'react-router-dom';
 
 const DELIVERY_FEE = 169;
 
@@ -23,6 +24,7 @@ export function Cart() {
   const jwt = useSelector((s: RootState) => s.user.jwt);
   const [cartItems, setCartItems] = useState<Product[]>();
   const [invalidPromo, setInvalidPromo] = useState<boolean>(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     loadProductInfo();
@@ -62,7 +64,7 @@ export function Cart() {
 
   const checkout = async () => {
     try {
-      const data = await axios.post(
+      const { data } = await axios.post(
         `${import.meta.env.VITE_API_URL}/order`,
         {
           products: products
@@ -73,6 +75,7 @@ export function Cart() {
           }
         }
       );
+      navigate(`/success/${data.id}`);
     } catch (e) {
       console.log(e);
     }

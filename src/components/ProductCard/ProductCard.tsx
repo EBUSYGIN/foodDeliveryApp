@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../Redux/store';
 import { cartActions } from '../../Redux/cart.slice';
 import { MouseEvent } from 'react';
+import RatingCard from '../RatingCard/RatingCard';
 
 function ProductCard(props: ProductCardProps) {
   const dispatch = useDispatch<AppDispatch>();
@@ -28,8 +29,7 @@ function ProductCard(props: ProductCardProps) {
             <img src='/add-button-icon.svg' alt='Иконка добавления в корзину' />
           </button>
           <div className={styles.rating}>
-            {props.rating}
-            <img src='/star-icon.svg' alt='Иконка звезды' />
+            <RatingCard rating={props.rating} />
           </div>
         </div>
         <div className={styles.footer}>

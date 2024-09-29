@@ -1,0 +1,9 @@
+.list {
+  margin: 0;
+  font-weight: 400;
+  font-size: 14px;
+  color: #5b5b5e;
+  padding: 0px;
+  text-transform: capitalize;
+  list-style-position: inside;
+}
