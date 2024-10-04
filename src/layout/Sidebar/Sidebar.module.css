@@ -5,6 +5,7 @@
 
 .sidebarContainer {
   position: static;
+  border-right: 1px solid var(--separator-color);
 }
 
 .sidebar {
@@ -13,8 +14,6 @@
   padding: 30px;
   height: 91vh;
   width: 240px;
-  border-bottom: 1px solid var(--separator-color);
-  border-right: 1px solid var(--separator-color);
 }
 
 .user {

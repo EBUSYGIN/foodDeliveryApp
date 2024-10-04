@@ -1,5 +1,14 @@
+.header {
+  margin-bottom: 30px;
+}
+
+.contentBox {
+  width: 100%;
+}
+
 .checkout {
   max-width: 512px;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   gap: 30px;

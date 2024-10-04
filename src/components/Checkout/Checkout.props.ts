@@ -1,6 +1,5 @@
+import { CartItem } from '../../interfaces/product.interface';
+
 export interface CheckoutProps {
-  productPrice: number;
-  deliveryFee: number;
-  totalPrice: number;
-  count: number;
+  products: CartItem[];
 }
